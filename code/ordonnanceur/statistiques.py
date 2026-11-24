@@ -44,3 +44,19 @@ def calculer_statistiques(processus, gantt):
     sejour_moyen = sum(ligne["sejour"] for ligne in lignes) / nombre
 
     return lignes, attente_moyenne, sejour_moyen
+def calculer_utilisation_cpu(gantt):
+        if not gantt:
+            return 0
+
+        temps_actif = sum(
+            segment.fin - segment.debut
+            for segment in gantt
+            if segment.nom != "INACTIF"
+        )
+
+        duree_totale = gantt[-1].fin - gantt[0].debut
+
+        if duree_totale == 0:
+            return 0
+
+        return (temps_actif / duree_totale) * 100
