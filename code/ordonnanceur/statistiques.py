@@ -10,6 +10,8 @@ Le calcul part du diagramme de Gantt. Il marche donc pour n'importe quel
 algorithme, sans rien changer.
 """
 
+from ordonnanceur.modeles import INACTIF
+
 
 def calculer_statistiques(processus, gantt):
     """Renvoie (lignes, attente_moyenne, sejour_moyen).
@@ -44,3 +46,28 @@ def calculer_statistiques(processus, gantt):
     sejour_moyen = sum(ligne["sejour"] for ligne in lignes) / nombre
 
     return lignes, attente_moyenne, sejour_moyen
+
+
+def calculer_utilisation_cpu(gantt):
+    """Pourcentage du temps où le CPU travaille, entre le début et la fin du Gantt.
+
+        utilisation = temps actif / durée totale x 100
+
+    Les cases où personne ne tourne s'appellent INACTIF ("--") dans le Gantt :
+    elles ne comptent pas comme du travail.
+    """
+    if not gantt:
+        return 0
+
+    temps_actif = sum(
+        segment.fin - segment.debut
+        for segment in gantt
+        if segment.nom != INACTIF
+    )
+
+    duree_totale = gantt[-1].fin - gantt[0].debut
+
+    if duree_totale == 0:
+        return 0
+
+    return (temps_actif / duree_totale) * 100
