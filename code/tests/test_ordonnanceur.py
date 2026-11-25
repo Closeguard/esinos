@@ -15,7 +15,7 @@ import unittest
 from ordonnanceur.modeles import Processus, Segment
 from ordonnanceur.algorithmes import (fcfs, sjf, priorite, round_robin,
                                       ajouter_segment)
-from ordonnanceur.statistiques import calculer_statistiques
+from ordonnanceur.statistiques import calculer_statistiques, calculer_utilisation_cpu
 from ordonnanceur.affichage import dessiner_gantt, formater_statistiques
 from ordonnanceur.menu import exemple
 
@@ -153,6 +153,27 @@ class TestCasParticuliers(unittest.TestCase):
         attendu = [("A", 0, 2), ("--", 2, 3), ("B", 3, 5)]
         self.assertEqual(en_tuples(fcfs(processus)), attendu)
         self.assertEqual(en_tuples(round_robin(processus, 5)), attendu)
+
+
+class TestUtilisationCPU(unittest.TestCase):
+
+    def test_cpu_toujours_occupe(self):
+        # Dans l'exemple du projet, le CPU ne s'arrête jamais : 22 sur 22.
+        self.assertEqual(calculer_utilisation_cpu(fcfs(exemple())), 100)
+
+    def test_cpu_inactif(self):
+        # CPU inactif de 0 à 2 et de 5 à 10 : il travaille 5 unités sur 12.
+        processus = [Processus("P1", 2, 3), Processus("P2", 10, 2)]
+        self.assertAlmostEqual(calculer_utilisation_cpu(fcfs(processus)), 500 / 12)
+
+    def test_meme_resultat_pour_tous_les_algorithmes(self):
+        # Le CPU travaille autant au total, quel que soit l'ordre de passage.
+        processus = [Processus("P1", 2, 3), Processus("P2", 10, 2)]
+        for gantt in (sjf(processus), priorite(processus), round_robin(processus, 2)):
+            self.assertAlmostEqual(calculer_utilisation_cpu(gantt), 500 / 12)
+
+    def test_gantt_vide(self):
+        self.assertEqual(calculer_utilisation_cpu([]), 0)
 
 
 class TestErreurs(unittest.TestCase):
