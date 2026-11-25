@@ -190,18 +190,36 @@ python3 -m unittest -v tests.test_ordonnanceur
 Résultat attendu, tout en bas :
 
 ```
-Ran 26 tests in 0.00Xs
+Ran 30 tests in 0.00Xs
 
 OK
 ```
 
-Sans le nom du fichier (`python3 -m unittest`), ce sont les 87 tests de tout le
+Sans le nom du fichier (`python3 -m unittest`), ce sont les 91 tests de tout le
 projet qui sont lancés.
 
 Les tests couvrent : l'exemple ci-dessus, l'exemple classique des manuels
 (P1 = 24, P2 = 3, P3 = 3, attente moyenne 17 en FCFS et 3 en SJF), le CPU
-inactif, les égalités, et les saisies impossibles (durée nulle, quantum nul,
-noms en double).
+inactif, les égalités, l'utilisation du CPU, et les saisies impossibles (durée
+nulle, quantum nul, noms en double).
+
+### Utilisation du CPU
+
+Sous les moyennes, le programme affiche aussi l'utilisation du CPU : la part du
+temps où le processeur travaille vraiment.
+
+```
+utilisation = temps actif / durée totale du Gantt x 100
+```
+
+Exemple : P1 arrive à 2 (durée 3), P2 arrive à 10 (durée 2). Le CPU ne fait
+rien de 0 à 2 et de 5 à 10. Il travaille 3 + 2 = 5 unités sur 12, soit
+**41,67 %**. Dans l'exemple du projet, il ne s'arrête jamais : **100 %**.
+
+Le calcul est fait par `calculer_utilisation_cpu(gantt)` dans
+`statistiques.py`. Les cases inactives du Gantt s'appellent `INACTIF` (le texte
+`"--"`) : elles ne comptent pas comme du travail. Le résultat est le même pour
+les quatre algorithmes, car le CPU a toujours le même travail total à faire.
 
 ## 8. Exercices pour vérifier que chacun a compris
 
@@ -269,4 +287,5 @@ d'avance, et changer de processus ne coûte rien.
 | Quantum trop petit | trop de changements de contexte |
 | Exemple du projet | attente moyenne : FCFS 5,75 ; SJF 5,25 ; RR (q = 2) 9,75 ; Priority 7,75 |
 | Exemple des manuels | 24, 3, 3 : attente 17 en FCFS, 3 en SJF |
+| Utilisation du CPU | temps actif / durée totale x 100 |
 

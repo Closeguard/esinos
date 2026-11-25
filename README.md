@@ -25,7 +25,7 @@ Groupe de TP : TPF, section 1
 
 | Module | Contenu |
 |---|---|
-| Ordonnanceur | FCFS, SJF, Round Robin, Priority ; diagramme de Gantt ; temps d'attente et de séjour par processus et en moyenne ; comparaison des quatre algorithmes |
+| Ordonnanceur | FCFS, SJF, Round Robin, Priority ; diagramme de Gantt ; temps d'attente et de séjour par processus et en moyenne ; utilisation du CPU ; comparaison des quatre algorithmes |
 | Mémoire | Pagination et traduction d'adresse logique → physique ; FIFO, LRU, Optimal avec affichage des cadres étape par étape ; comptage des défauts de page ; simulation d'un TLB ; calcul de l'EAT |
 | Fichiers (bonus) | Disque simulé dans un fichier ; allocation de blocs ; inodes ; créer, lire, supprimer ; table des inodes ; carte des blocs |
 | Interface | Menu principal, un sous-menu par module, saisies vérifiées, retour au menu précédent, sortie propre |
