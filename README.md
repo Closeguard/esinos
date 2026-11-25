@@ -12,7 +12,12 @@ système d'exploitation :
 3. **le système de fichiers** (bonus) : comment des fichiers sont rangés sur
    un disque avec des inodes.
 
-**Équipe :** à compléter (vos quatre noms et votre groupe de TP).
+**Équipe :**
+
+- Mohamed Amine El Guandafi
+- Ziad El Gazzar
+- Yasmina Saidi
+- Ziad Bakraoui
 
 ## Fonctionnalités
 
@@ -101,7 +106,7 @@ python3 -m unittest
 Résultat attendu :
 
 ```
-Ran 87 tests in 0.XXXs
+Ran 91 tests in 0.XXXs
 
 OK
 ```
