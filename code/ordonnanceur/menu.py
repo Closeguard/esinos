@@ -46,11 +46,9 @@ def afficher_resultat(titre, processus, gantt):
     """Affiche le Gantt puis le tableau des temps pour un algorithme."""
     lignes, attente_moyenne, sejour_moyen = calculer_statistiques(processus, gantt)
     print()
-    print(f"===== {titre} =====")
-    print(dessiner_gantt(gantt))
-    print()
+    titre("Ordonnanceur")
     print(formater_statistiques(lignes, attente_moyenne, sejour_moyen))
-
+    print(f"Utilisation CPU : {calculer_utilisation_cpu(gantt):.2f}%")
 
 def comparer(processus, quantum):
     """Lance les quatre algorithmes et affiche seulement les moyennes."""
