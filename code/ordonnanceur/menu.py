@@ -8,7 +8,7 @@ fonctions des autres fichiers et affiche leurs résultats.
 from interface import titre, pause, demander_entier
 from ordonnanceur.modeles import Processus
 from ordonnanceur.algorithmes import fcfs, sjf, priorite, round_robin
-from ordonnanceur.statistiques import calculer_statistiques
+from ordonnanceur.statistiques import calculer_statistiques, calculer_utilisation_cpu
 from ordonnanceur.affichage import dessiner_gantt, formater_statistiques
 
 
@@ -46,7 +46,7 @@ def afficher_resultat(titre, processus, gantt):
     """Affiche le Gantt puis le tableau des temps pour un algorithme."""
     lignes, attente_moyenne, sejour_moyen = calculer_statistiques(processus, gantt)
     print()
-    titre("Ordonnanceur")
+    print("Ordonnanceur")
     print(formater_statistiques(lignes, attente_moyenne, sejour_moyen))
     print(f"Utilisation CPU : {calculer_utilisation_cpu(gantt):.2f}%")
 
